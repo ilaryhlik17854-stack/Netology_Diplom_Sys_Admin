@@ -1,0 +1,73 @@
+---
+- name: Install Zabbix
+  hosts: mon
+  become: true
+  vars:
+    pass_zabbixdb: zabbix
+
+  tasks:
+    - name: Download Zabbix 
+      shell: wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_6.0+ubuntu22.04_all.deb
+      args:
+        chdir: /tmp
+
+    - name: Install Zabbix
+      shell: dpkg -i zabbix-release_latest_6.0+ubuntu22.04_all.deb
+      args:
+        chdir: /tmp
+
+    - name: Update packages
+      apt:
+        update_cache: yes
+
+    - name: Install packages Zabbix
+      apt:
+        name:
+          - apache2
+          - postgresql
+          - postgresql-contrib
+          - python3-pexpect
+          - python3-pip
+          - python3-dev
+          - python3-venv
+          - python3-psycopg2
+          - php8.1-pgsql
+          - zabbix-server-pgsql
+          - zabbix-frontend-php
+          - zabbix-apache-conf
+          - zabbix-sql-scripts
+          - zabbix-agent
+        state: present
+
+    - name: Create user PostgreSQL for Zabbix
+      ansible.builtin.expect:
+        command: sudo -u postgres createuser --pwprompt zabbix
+        responses:
+          (?i).*(Enter password for new role)(.*):
+           - '{{ pass_zabbixdb }}'
+          (?i).*(Enter it again)(.*):
+           - '{{ pass_zabbixdb }}'
+
+    - name: Create database PostgreSQL for Zabbix
+      shell: >
+        sudo -u postgres createdb -O zabbix zabbix
+
+    - name: Importing the initial schema and data
+      shell:
+        zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+
+    - name: Importing DBPassword in the configuration file Zabbix
+      lineinfile:
+        path: /etc/zabbix/zabbix_server.conf
+        regexp: '^DBPassword='
+        line: 'DBPassword=zabbix'
+    - name: Restert services Zabbix
+      service:
+        name: "{{ item }}"
+        state: restarted
+        enabled: yes
+
+      loop:
+        - zabbix-server
+        - zabbix-agent
+        - apache2

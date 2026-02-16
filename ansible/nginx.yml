@@ -1,0 +1,52 @@
+---
+- name: install Nginx and setting
+  hosts: web
+  become: yes
+
+  tasks:
+
+    - name: update packeg
+      apt:
+        update_cache: yes
+        
+    - name: install Nginx
+      apt:
+        name: nginx-full
+        state: latest
+        update_cache: yes
+        
+    - name: install php8.1
+      apt:
+        name: php8.1
+        state: latest
+        update_cache: yes  
+        
+    - name: install php8.1-fpm
+      apt:
+        name: php8.1-fpm
+        state: latest
+        update_cache: yes
+       
+    - name: Сreature HTML
+      copy:
+        src: /home/wah3299/ansible/index.php
+        dest: /var/www/html/index.php
+        owner: www-data
+        group: www-data
+
+      notify:
+        - Restart Nginx
+    
+    - name: Сreature siting
+      copy:
+        src: /home/wah3299/ansible/default
+        dest: /etc/nginx/sites-available/default
+
+      notify:
+        - Restart Nginx
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+

@@ -1,0 +1,30 @@
+---
+- name: Install Elastic
+  hosts: elastic_srv
+  become: yes
+  gather_facts: true
+
+  tasks:
+  - name: Install elasticsearch
+    apt:
+       deb: "https://mirror.yandex.ru/mirrors/elastic/7/pool/main/e/elasticsearch/elasticsearch-7.17.27-amd64.deb"
+
+  - name: Create a directory
+    ansible.builtin.file:
+       path: /etc/elasticsearch
+       state: directory
+       mode: '0755'
+  - name: Copy config file elasticsearch
+    copy:
+      src: /home/wah3299/ansible/elastic_conf.yml
+      dest: /etc/elasticsearch/elasticsearch.yml
+
+  - name: daemon_reload
+    systemd:
+      daemon_reload: true
+
+  - name: reload elasticsearch and autorun
+    service:
+      name: elasticsearch
+      state: restarted
+      enabled: yes

@@ -1,0 +1,31 @@
+---
+- name: Install Zabbix Agent on group server web
+  hosts: web
+  become: true
+  vars:
+    zabbix_server: 192.168.4.5
+  tasks:
+    - name: Install packeges
+      apt:
+        name: zabbix-agent
+        state: present
+
+    - name: Create directory for logs Zabbix Agent
+      command: mkdir -p /var/log/zabbix/
+      become_user: root
+
+    - name: Setting rights to the logs directory Zabbix Agent
+      command: chown zabbix /var/log/zabbix/
+      become_user: root
+
+    - name: Copying the configuration file Zabbix Agent
+      template:
+        src: /home/wah3299/ansible/zabbix_agentd.conf.j2
+        dest: /etc/zabbix/zabbix_agentd.conf
+      notify: restart zabbix-agent
+
+  handlers:
+    - name: restart zabbix-agent
+      service:
+        name: zabbix-agent
+        state: restarted

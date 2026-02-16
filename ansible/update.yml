@@ -1,0 +1,12 @@
+---
+- name: Install Zabbix
+  hosts: all
+  become: true
+  
+  tasks:
+
+    - name: Update packages
+      apt:
+        update_cache: yes
+ #       upgrade: yes
+

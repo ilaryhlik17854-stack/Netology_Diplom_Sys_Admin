@@ -1,0 +1,26 @@
+---
+- name: Insatall Kibana
+  hosts: kibana_srv
+  become: yes
+  vars:
+    elastic_httphost: 192.168.3.4:9200
+  tasks:
+
+  - name: Insatall kibana
+    apt:
+      deb: "https://mirror.yandex.ru/mirrors/elastic/7/pool/main/k/kibana/kibana-7.17.27-amd64.deb"
+
+  - name: Copy config file kibana
+    template:
+      src: /home/wah3299/ansible/kibana.j2
+      dest: /etc/kibana/kibana.yml
+
+  - name: daemon_reload
+    systemd:
+      daemon_reload: true
+
+  - name:  Reload kibana and autostart
+    service:
+      name: kibana
+      state: restarted
+      enabled: yes
