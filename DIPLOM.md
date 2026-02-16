@@ -42,7 +42,7 @@ internal_ip_address_zabbix = "192.168.4.5"
 
 ### Виртуальные машины
 
-![d-01-01.png]()
+![d-01-01.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-01.png?raw=true)
 
 
 
