@@ -142,7 +142,7 @@ ansible-playbook update.yml
 
 ![d-02-05.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-05.png?raw=true)
 
-Делаем запрос `ansible$ curl -v 158.160.199.15`
+Делаем запрос `curl -v 158.160.199.15`
 
 ![d-02-06.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-06.png?raw=true)
 
@@ -205,7 +205,7 @@ web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
 
 ![d-02-18.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-18.png?raw=true)
 
-Проверяем что Filebeat  доставляет логи в Elasticsearchh 
+Проверяем что Filebeat  доставляет логи в Elasticsearch
 
 [89.169.179.131](http://89.169.179.131:5601/app/home#/)
 
