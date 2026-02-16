@@ -175,9 +175,11 @@ ansible-playbook zabbix_agent.yml
 зайдем на web1 и web2 и посмотрим поднялась ли служба
 
 web1 `ssh -J user@84.252.139.94 user@192.168.1.3`
+
 ![d-02-11.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-11.png?raw=true)
 
 web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
+
 ![d-02-12.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-12.png?raw=true)
 
 Добавляем web сервера в zabbix
@@ -191,16 +193,19 @@ web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
 ### Установа Elasticsearch, Kibana и Filebeat
 
 Установа Elasticsearch `ansible-playbook elastic.yml`
+
 [elastic.yml](nginx.yml)
 
 ![d-02-16.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-16.png?raw=true)
 
 Установа Kibana `ansible-playbook kibana.yml`
+
 [kibana.yml](nginx.yml)
 
 ![d-02-17.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-17.png?raw=true)
 
 Установа Filebeat `ansible-playbook filebeat.yml`
+
 [filebeat.yml](nginx.yml)
 
 ![d-02-18.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-18.png?raw=true)
