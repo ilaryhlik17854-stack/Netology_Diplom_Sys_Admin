@@ -2,16 +2,23 @@
 
 ## Для поднятия инфраструктуры в `Yandex Cloud` используем `terraform`
 
-[compute_disks.tf]() - HDD с образоми OS собираемых виртуальных машин
-[instance.tf]() - параметры виртуальных серверов
-[meta.txt]() - учетная запись для витруалки + key.pub
-[network.tf]() - виртуальные сити
-[outputs.tf]() - вывод сетевых адресов
-[providers.tf]() - параметры авторизации в яндекс cloud
-[security_group.tf]() - группы безопасности
-[snapshots.tf]() - параметры backup 
+[compute_disks.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/compute_disks.tf) - HDD с образоми OS собираемых виртуальных машин
 
-Для доступа к яндекс cloud используем сервичный аккаунт
+[instance.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/instance.tf) - параметры виртуальных серверов
+
+[meta.txt](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/meta.txt) - учетная запись для витруалки + key.pub
+
+[network.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/network.tf) - виртуальные сити
+
+[outputs.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/outputs.tf) - вывод сетевых адресов
+
+[providers.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/providers.tf) - параметры авторизации в яндекс cloud
+
+[security_group.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/security_group.tf) - группы безопасности
+
+[snapshots.tf](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/terraform/security_group.tf) - параметры backup 
+
+Для доступа к яндекс cloud используем сервиcный аккаунт
 
 Выполняем команды terraform init, terraform plan, terraform apply
 
@@ -38,7 +45,7 @@ internal_ip_address_web-2 = "192.168.2.3"
 internal_ip_address_zabbix = "192.168.4.5"
 
 ```
-Перезодим на сайт https://console.yandex.cloud/ и просматриваем что мы создали
+Заходим на сайт https://console.yandex.cloud/ и просматриваем что мы создали
 
 ### Виртуальные машины
 
@@ -88,7 +95,7 @@ internal_ip_address_zabbix = "192.168.4.5"
 
 ![d-01-19.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-19.png?raw=true)
 
-![d-01-20.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-20.png?raw=true)
+---
 
 ## Для установки и настройки приложенирй используем `ansible`
 
@@ -114,7 +121,8 @@ zabbix_srv ansible_host=zabbix.ru-central1.internal
 
 сделаем команду apt update на всех хостах 
 ansible-playbook update.yml
-[update.yml]()
+
+[update.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/update.yml)
 
 ![d-02-01.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-01.png?raw=true)
 
@@ -124,11 +132,11 @@ ansible-playbook update.yml
 
 ### Настройка WEB серверов
 
-[update.yml](nginx.yml)
+[nginx.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/kibana.yml)
 
 ![d-02-03.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-03.png?raw=true)
 
-Заходим на сайтhttp://158.160.199.15/
+Заходим на сайт http://158.160.199.15/
 
 ![d-02-04.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-04.png?raw=true)
 
@@ -144,13 +152,14 @@ ansible-playbook update.yml
 
 ### Установка системы монтитоинга Zabbix и агентов
 
-[zabbix.yml](nginx.yml)
+[zabbix.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/zabbix.yml)
 
 Запустим `ansible-playbook zabbix.yml`
 
 ![d-02-08.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-08.png?raw=true)
 
 Зайдем на сайт http://89.169.182.249/zabbix/
+
 Логин и пароль стандартные
 
 ![d-02-09.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-09.png?raw=true)
@@ -159,11 +168,11 @@ ansible-playbook update.yml
 
 ansible-playbook zabbix_agent.yml
 
-[zabbix_agent.yml](nginx.yml)
+[zabbix_agent.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/zabbix_agent.yml)
 
 ![d-02-10.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-10.png?raw=true)
 
-зайдем на web1 и web2 и посмотрим понялась ли служба
+зайдем на web1 и web2 и посмотрим поднялась ли служба
 
 web1 `ssh -J user@84.252.139.94 user@192.168.1.3`
 ![d-02-11.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-11.png?raw=true)
