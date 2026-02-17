@@ -56,6 +56,8 @@ internal_ip_address_zabbix = "192.168.4.5"
 
 ![d-01-02.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-02.png?raw=true)
 
+![d-01-02-01.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-02-01.png?raw=true)
+
 ### Группы безопасности
 
 ![d-01-03.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-01-03.png?raw=true)
@@ -143,7 +145,7 @@ ansible-playbook update.yml
 
 ![d-02-05.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-05.png?raw=true)
 
-Делаем запрос `curl -v 158.160.199.15`
+Делаем запрос `curl -v 158.160.146.79`
 
 ![d-02-06.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-06.png?raw=true)
 
@@ -175,11 +177,11 @@ ansible-playbook zabbix_agent.yml
 
 зайдем на web1 и web2 и посмотрим поднялась ли служба
 
-web1 `ssh -J user@84.252.139.94 user@192.168.1.3`
+web1 `ssh -J user@89.169.160.52 user@192.168.1.3`
 
 ![d-02-11.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-11.png?raw=true)
 
-web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
+web2 `ssh -J user@89.169.160.52 user@192.168.2.3`
 
 ![d-02-12.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-12.png?raw=true)
 
@@ -195,24 +197,26 @@ web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
 
 Установа Elasticsearch `ansible-playbook elastic.yml`
 
-[elastic.yml](nginx.yml)
+[elastic.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/elastic.yml)
 
 ![d-02-16.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-16.png?raw=true)
 
 Установа Kibana `ansible-playbook kibana.yml`
 
-[kibana.yml](nginx.yml)
+[kibana.yml](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/kibana.yml)
 
 ![d-02-17.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-17.png?raw=true)
 
 Установа Filebeat `ansible-playbook filebeat.yml`
 
-[filebeat.yml](nginx.yml)
+[filebeat.yml](hhttps://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/ansible/filebeat.yml)
 
 ![d-02-18.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-18.png?raw=true)
 
 Проверяем что Filebeat  доставляет логи в Elasticsearch
 
 [84.252.139.94](http://84.252.139.94:5601/app/home#/)
+
+http://84.252.139.94:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'35358c50-0c1e-11f1-95c7-8f35bd00af7d',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))
 
 ![d-02-19.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-19.png?raw=true)
