@@ -33,16 +33,17 @@ FQDN_kibana = "kibana.ru-central1.internal"
 FQDN_web-1 = "web1.ru-central1.internal"
 FQDN_web-2 = "web2.ru-central1.internal"
 FQDN_zabbix = "zabbix.ru-central1.internal"
-external_ip_address_L7balancer = "158.160.199.15"
-external_ip_address_bastion = "84.252.139.94"
-external_ip_address_kibana = "89.169.179.131"
-external_ip_address_zabbix = "89.169.182.249"
+external_ip_address_L7balancer = "158.160.146.79"
+external_ip_address_bastion = "89.169.160.52"
+external_ip_address_kibana = "84.252.139.94"
+external_ip_address_zabbix = "89.169.164.43"
 internal_ip_address_bastion = "192.168.4.4"
 internal_ip_address_elastic = "192.168.3.4"
 internal_ip_address_kibana = "192.168.4.3"
 internal_ip_address_web-1 = "192.168.1.3"
 internal_ip_address_web-2 = "192.168.2.3"
 internal_ip_address_zabbix = "192.168.4.5"
+
 
 ```
 Заходим на сайт https://console.yandex.cloud/ и просматриваем что мы создали
@@ -105,7 +106,7 @@ internal_ip_address_zabbix = "192.168.4.5"
 [all:vars]
 ansible_user=user
 ansible_ssh_private_key_file=/home/wah3299/.ssh/id_ed25519
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q user@84.252.139.94"'
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q user@889.169.160.52"'
 
 [log]
 elastic_srv ansible_host=elastic.ru-central1.internal
@@ -136,7 +137,7 @@ ansible-playbook update.yml
 
 ![d-02-03.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-03.png?raw=true)
 
-Заходим на сайт http://158.160.199.15/
+Заходим на сайт http://158.160.146.79
 
 ![d-02-04.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-04.png?raw=true)
 
@@ -158,7 +159,7 @@ ansible-playbook update.yml
 
 ![d-02-08.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-08.png?raw=true)
 
-Зайдем на сайт http://89.169.182.249/zabbix/
+Зайдем на сайт http://89.169.164.43/zabbix
 
 Логин и пароль стандартные
 
@@ -212,6 +213,6 @@ web2 `ssh -J user@84.252.139.94 user@192.168.2.3`
 
 Проверяем что Filebeat  доставляет логи в Elasticsearch
 
-[89.169.179.131](http://89.169.179.131:5601/app/home#/)
+[84.252.139.94](http://84.252.139.94:5601/app/home#/)
 
 ![d-02-19.png](https://github.com/ilaryhlik17854-stack/Netology_Diplom_Sys_Admin/blob/main/img/d-02-19.png?raw=true)
