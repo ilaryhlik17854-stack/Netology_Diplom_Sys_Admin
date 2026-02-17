@@ -108,7 +108,7 @@ internal_ip_address_zabbix = "192.168.4.5"
 [all:vars]
 ansible_user=user
 ansible_ssh_private_key_file=/home/wah3299/.ssh/id_ed25519
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q user@889.169.160.52"'
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q user@89.169.160.52"'
 
 [log]
 elastic_srv ansible_host=elastic.ru-central1.internal
